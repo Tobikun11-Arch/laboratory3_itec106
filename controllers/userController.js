@@ -83,3 +83,21 @@ export const patchUser = async (req, res) => {
     res.status(500).json({error: error.message});
   }
 };
+
+export const deleteUser = async (req, res) => {
+  const {id} = req.params;
+
+  try {
+    const [result] = await pool.query('DELETE FROM students WHERE id = ?', [
+      id
+    ]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({error: 'User not found'});
+    }
+
+    res.status(200).json({message: 'User deleted successfully'});
+  } catch (error) {
+    res.status(500).json({error: error.message});
+  }
+};
