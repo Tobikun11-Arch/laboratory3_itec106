@@ -4,6 +4,7 @@ import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 const app = express();
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('TEST MIC');
